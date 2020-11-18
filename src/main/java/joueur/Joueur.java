@@ -1,4 +1,4 @@
-package joueurs;
+package joueur;
 
 import cartes.batiments.CarteBatiments;
 import cartes.ouvriers.CarteOuvriers;
@@ -7,10 +7,10 @@ import cartes.ouvriers.CarteOuvriers;
 import java.util.ArrayList;
 
 public class Joueur {
-       int id;
+       private int id;
        private int points;
-       ArrayList<CarteBatiments> MainBat = new ArrayList<>();
-       ArrayList<CarteOuvriers> MainOuv = new ArrayList<>();
+       private ArrayList<CarteBatiments> MainBat = new ArrayList<>();
+       private ArrayList<CarteOuvriers> MainOuv = new ArrayList<>();
 
        public Joueur(int id){
            this.id=id;
@@ -46,6 +46,7 @@ public class Joueur {
        }
        public void attribuerOuvrierAChantier(CarteOuvriers ouvrier, CarteBatiments batiment){
            batiment.attribuerOuvrier(ouvrier);
+           MainOuv.remove(ouvrier);
        }
 
 }

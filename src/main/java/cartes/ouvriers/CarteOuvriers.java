@@ -18,8 +18,7 @@ public class CarteOuvriers extends Cartes {
     public void setCout(int cout) {
         this.cout = cout;
     }
-    public boolean isAssign() {
-        return assign;
+    public boolean isAssign() { return assign;
     }
     public void setAssign(boolean assign) {
         this.assign = assign;

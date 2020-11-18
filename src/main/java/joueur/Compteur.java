@@ -1,4 +1,4 @@
-package joueurs;
+package joueur;
 
 public class Compteur {
     int id;

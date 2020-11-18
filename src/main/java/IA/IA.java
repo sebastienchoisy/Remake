@@ -2,7 +2,7 @@ package IA;
 
 import cartes.batiments.CarteBatiments;
 import cartes.ouvriers.CarteOuvriers;
-import joueurs.Joueur;
+import joueur.Joueur;
 
 import java.util.ArrayList;
 

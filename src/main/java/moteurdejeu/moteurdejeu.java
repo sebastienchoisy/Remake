@@ -5,7 +5,7 @@ import cartes.batiments.CarteBatiments;
 import cartes.batiments.DeckBatiments;
 import cartes.ouvriers.CarteOuvriers;
 import cartes.ouvriers.DeckOuvriers;
-import joueurs.Joueur;
+import joueur.Joueur;
 
 import java.util.ArrayList;
 import java.util.Collections;

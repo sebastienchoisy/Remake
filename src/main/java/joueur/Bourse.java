@@ -1,8 +1,6 @@
-package joueurs;
+package joueur;
 
 import cartes.ouvriers.CarteOuvriers;
-
-import java.util.ArrayList;
 
 public class Bourse {
     private int pieceArgent, pieceOr, ecus;

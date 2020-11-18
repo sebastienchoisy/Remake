@@ -46,7 +46,7 @@ public class CarteBatiments extends Cartes {
     }
     public void libererOuvrier(){
         if(ouvriers.size()!=0){
-        for(int i=0;i< ouvriers.size();i++){
+        for(int i=0;i< ouvriers.size()+1;i++){
             ouvriers.remove(0);
         }
         }else{

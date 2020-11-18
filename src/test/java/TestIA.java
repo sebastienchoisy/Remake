@@ -1,5 +1,5 @@
 import cartes.batiments.CarteBatiments;
-import joueurs.Joueur;
+import joueur.Joueur;
 import org.junit.Test;
 import IA.IA;
 
