@@ -1,62 +1,134 @@
 package cartes.batiments;
-import cartes.batiments.CarteBatiments;
-import cartes.ouvriers.CarteOuvriers;
-import org.junit.jupiter.api.Test;
 
+import cartes.*;
+import cartes.ouvrier.CarteOuvriers;
+import cartes.ouvrier.DeckOuvriers;
+import joueurs.*;
+import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+
+import static cartes.batiments.CarteBatiments.getCarteBatById;
+import static cartes.batiments.CarteBatiments.obtenirDeckJoueur;
+import static moteurdejeu.MoteurDeJeu.placerOuvrierSurChantier;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 public class TestCarteBatiments {
-    CarteBatiments carteBat = new CarteBatiments(0,"batiment",2,3,6,5,9,5);
-    CarteOuvriers carteOuv1 = new CarteOuvriers(0,"ouvrier1",4,3,2,1,5);
-    CarteOuvriers carteOuv2 = new CarteOuvriers(1,"ouvrier2",5,6,4,2,4);
+    @Test
+    public void TestCartesBatiments(){ //verifie création des Cartes Batiments
+        int cond = 0;
+        CarteBatiments b1 = new CarteBatiments(8,"foo",0,0,0,0,0,0);
+
+        if (b1.getId() == 8){
+            cond ++;
+        }
+
+        if (b1.getName().equals("foo")){
+            cond++;
+        }
+        assertEquals(2, cond);
+    }
+
 
     @Test
-    public void testAttribuerOuvrier(){
-        carteBat.libererOuvrier();
-        carteBat.attribuerOuvrier(carteOuv1);
-        assertEquals("ouvrier1",carteBat.getOuvriers().get(0).getNom());
+    public void testAffectationChantier(){
+        Joueurs test = new Joueurs(1);
+        ArrayList<CarteBatiments> DeckBatiment = new DeckBatiments().getDeck();
+        DeckBatiment.get(0).AffectationChantier(1);
+        assertEquals(DeckBatiment.get(0).getIdJoueur(),1);
+
     }
 
     @Test
-    public void testlibererOuvrier(){
-        carteBat.libererOuvrier();
-        carteBat.attribuerOuvrier(carteOuv1);
-        carteBat.libererOuvrier();
-        assertEquals(0,carteBat.getOuvriers().size());
-
+    public void testGetIdJoueur(){
+        ArrayList<CarteBatiments> DeckBatiment = new DeckBatiments().getDeck();
+        assertEquals(DeckBatiment.get(0).getIdJoueur(), -1);
     }
 
     @Test
-    public void testGetSumRessources(){
-        assertEquals(16,carteBat.getSumRessources());
+    public void testGetId(){
+        ArrayList<CarteBatiments> DeckBatiment = new DeckBatiments().getDeck();
+        assertEquals(DeckBatiment.get(0).getId(), 0);
     }
 
     @Test
-    public void testGetSumBoisOuv(){
-        carteBat.attribuerOuvrier(carteOuv1);
-        carteBat.attribuerOuvrier(carteOuv2);
-        assertEquals(6,carteBat.getSumBoisOuv());
+    public void testGetIdOuvrier(){
+        ArrayList<Integer> ouvriers = new ArrayList<>();
+        ArrayList<CarteBatiments> DeckBatiment = new DeckBatiments().getDeck();
+        assertEquals(DeckBatiment.get(0).getIdOuvrier(), ouvriers);
+
+    }
+
+    /*@Test
+    public void testAffectationOuvrierAChantier(){
+        ArrayList<Integer> ouvriers = new ArrayList<>();
+        ArrayList<CarteBatiments> DeckBatiment = new DeckBatiments().getDeck();
+        DeckBatiment.get(0).AffectationOuvrierAChantier(ouvriers.get(0));
+        assertEquals(DeckBatiment.get(0).getIdOuvrier(),1);
+    }*/
+
+    @Test
+    public void testGetName(){
+        ArrayList<CarteBatiments> DeckBatiment = new DeckBatiments().getDeck();
+        assertEquals(DeckBatiment.get(0).getName(),"la cabane");
     }
 
     @Test
-    public void testGetSumPierreOuv(){
-        carteBat.libererOuvrier();
-        carteBat.attribuerOuvrier(carteOuv1);
-        carteBat.attribuerOuvrier(carteOuv2);
-        assertEquals(9,carteBat.getSumPierreOuv());
-    }
-    @Test
-    public void testGetSumTuileOuv(){
-        carteBat.libererOuvrier();
-        carteBat.attribuerOuvrier(carteOuv1);
-        carteBat.attribuerOuvrier(carteOuv2);
-        assertEquals(9,carteBat.getSumTuileOuv());
-    }
-    @Test
-    public void testGetSumSavoirOuv(){
-        carteBat.attribuerOuvrier(carteOuv1);
-        carteBat.attribuerOuvrier(carteOuv2);
-        assertEquals(3,carteBat.getSumSavoirOuv());
+    public void testSumRessources(){
+        //A faire
     }
 
+    @Test
+    public void testIsBuilt(){
+        Joueurs test = new Joueurs(1);
+        ArrayList<CarteBatiments> DeckBatiment = new DeckBatiments().getDeck();
+        ArrayList<CarteOuvriers> DeckOuvrier = new DeckOuvriers().getDeck();
+        placerOuvrierSurChantier(DeckBatiment.get(0),DeckOuvrier.get(0));
+        assertEquals(false, DeckBatiment.get(0).isBuiltShort());
+    }
+
+    @Test
+    public void testIsBuildShort(){
+        ArrayList<CarteBatiments> DeckBatiment = new DeckBatiments().getDeck();
+        ArrayList<CarteOuvriers> DeckOuvrier = new DeckOuvriers().getDeck();
+        placerOuvrierSurChantier(DeckBatiment.get(0),DeckOuvrier.get(0));
+        assertEquals(false, DeckBatiment.get(0).isBuiltShort());
+    }
+
+    @Test
+    public void testCarteSurTable(){
+        ArrayList<CarteBatiments> deck = new  DeckBatiments().getDeck();
+        ArrayList<CarteBatiments> CartesBatimentSurTable =  CarteBatiments.carteSurTable(deck);
+        for(int i=0;i<CartesBatimentSurTable.size();i++){
+            assertEquals(i,CartesBatimentSurTable.get(i).getId());
+        }
+    }
+
+    @Test
+    public void testObtenirDeckJoueur(){
+        Joueurs test = new Joueurs(1);
+        ArrayList<CarteBatiments> DeckBatiment = new DeckBatiments().getDeck();
+        ArrayList<InternalError> a = new ArrayList<>();
+        assertEquals(obtenirDeckJoueur(1,DeckBatiment),a);// Mis 1 pour essayer mais le est ne passe pas : java: illegal start of type
+    }
+
+    @Test
+    public void testObtenirChantierEncours(){
+        Joueurs test = new Joueurs(1);
+        ArrayList<CarteBatiments> DeckBatiment = new DeckBatiments().getDeck();
+        ArrayList<InternalError> a = new ArrayList<>();
+        assertEquals(obtenirDeckJoueur(1,DeckBatiment),a);
+    }
+
+    @Test
+    public void testGetCarteBatById(){
+        ArrayList<CarteBatiments> DeckBatiment = new DeckBatiments().getDeck();
+        assertEquals(getCarteBatById(1,DeckBatiment),DeckBatiment.get(1));
+    }
+
+    @Test
+    public void testGetPoint(){
+        ArrayList<CarteBatiments> DeckBatiment = new DeckBatiments().getDeck();
+        assertEquals(DeckBatiment.get(0).getPoint(),0);
+    }
 }

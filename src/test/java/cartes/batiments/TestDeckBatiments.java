@@ -1,17 +1,17 @@
 package cartes.batiments;
 
-import cartes.batiments.CarteBatiments;
-import cartes.batiments.DeckBatiments;
+import cartes.Cartes;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-public class TestDeckBatiments {
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+public class TestDeckBatiments {
     @Test
-    public void testGetDeck(){
+    public void testDeckBatiments() {
         ArrayList<CarteBatiments> deck = new DeckBatiments().getDeck();
-        assertEquals(42,deck.size());
+        Cartes carteTest = deck.get(6);
+        assertEquals("la pont couvert",carteTest.getNom());
     }
 }

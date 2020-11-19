@@ -1,6 +1,10 @@
 package cartes;
 
-public class Cartes {
+/**
+ * La classe Cartes contient des méthodes générales sur les cartes (ouvriers et batiments)
+ */
+
+public class Cartes { //Classe mère des classes CarteBatiments et CarteOuvriers
 
     protected int id,bois,tuile,savoir,pierre;
     protected String nom;
@@ -70,6 +74,7 @@ public class Cartes {
     @Override
     public String toString() {      //méthode pour visualiser
         return "Carte : "
-                +nom+"";
+                 +nom+"";
     }
+
 }

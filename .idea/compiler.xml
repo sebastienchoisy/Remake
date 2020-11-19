@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="remakeProjet" />
+        <module name="Batisseurs" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Batisseurs" target="14" />
+    </bytecodeTargetLevel>
   </component>
 </project>

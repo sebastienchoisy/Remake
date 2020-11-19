@@ -1,10 +1,16 @@
 package cartes.batiments;
 
+
+import cartes.batiments.CarteBatiments;
+
 import java.util.ArrayList;
 
-public class DeckBatiments {
+/**
+ * Classe qui permet la création du deck contenant les cartes bâtiments
+ */
 
-    private ArrayList<CarteBatiments> deck = new ArrayList<>();
+public class DeckBatiments {
+     private ArrayList<CarteBatiments> deck = new ArrayList<>();
 
     public DeckBatiments(){
         deck.add(new CarteBatiments(0,"la cabane", 0, 1, 1, 0, 8, 0));
@@ -58,4 +64,9 @@ public class DeckBatiments {
     public ArrayList<CarteBatiments> getDeck(){
         return deck;
     }
+
+    public int len(){
+        return deck.size();
+    }
+
 }

@@ -4,21 +4,109 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>remakeProjet</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>bat20-B</groupId>
+    <artifactId>Batisseurs</artifactId>
+    <version>1.0</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> <!-- éventuellement à changer : encodage de vos fichiers -->
+        <compiler.source>14</compiler.source> <!-- éventuellement à changer : version de java (sdk) utilisée pour le développement -->
+        <compiler.target>14</compiler.target> <!-- éventuellement à changer : version de java pour l'utilisateur -->
+    </properties>
+
     <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
         <plugins>
+
+            <!-- Permet à maven de lancer les tests Junit 5 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+
+            <!-- la génération de la  javadoc s'utilise avec "mvn site" -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <javadocExecutable>C:\Program Files\Java\jdk-14.0.2\bin\javadoc</javadocExecutable>
+                    <show>package</show>
+                    <nohelp>true</nohelp>
+                    <encoding>utf-8</encoding> <!-- éventuellement à changer : encodage de vos fichiers -->
+                    <charset>utf-8</charset> <!-- éventuellement à changer : encodage de vos fichiers -->
+                    <docencoding>utf-8</docencoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>javadoc</id>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                        <phase>site</phase>
+                        <configuration>
+                            <overview>${basedir}/src/main/java/moteurdejeu/overview.html</overview>
+                            <!-- endroit où seront les fichiers html générés ! attention au .gitignore ! -->
+                            <!-- ici, c'est dans src/main/apidocs -->
+                            <outputDirectory>${basedir}/src/main/java/moteurdejeu</outputDirectory>
+                            <reportOutputDirectory>${basedir}/src/main/java/moteurdejeu</reportOutputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test-javadoc</id>
+                        <goals>
+                            <goal>test-javadoc</goal>
+                        </goals>
+                        <phase>site</phase>
+                        <configuration>
+                            <!-- endroit où seront les fichiers html générés ! attention au .gitignore ! -->
+                            <!-- ici, c'est dans src/test/apidocs -->
+                            <reportOutputDirectory>${basedir}/src/test/</reportOutputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.7</version>
+            </plugin>
+
+
+            <!-- Permet à maven de compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
-                    <source>7</source>
-                    <target>7</target>
+                    <source>14</source>
+                    <target>14</target>
+                </configuration>
+            </plugin>
+
+            <!-- Définition de la main class à exécuter -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version> <!-- à ne pas changer : c'est la version du plugin (et pas de java) -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>moteurdejeu.MoteurDeJeu</mainClass>
                 </configuration>
             </plugin>
         </plugins>
+
     </build>
+
     <dependencies>
         <!-- on intègre JUnit 5 -->
         <dependency>
@@ -27,13 +115,5 @@
             <version>5.5.2</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
-
-
 </project>
